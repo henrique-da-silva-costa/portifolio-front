@@ -76,15 +76,17 @@ const Barbearias = () => {
 
     return (
         <Container>
-            <h1>BARBEARIAS</h1>
+            <h1 className="mt-3">BARBEARIAS</h1>
             <CadastrarBarbearia pegarDados={pegarDados} className="text-end" />
             <div className="row">
-                <Table striped>
+                {dados.length > 0 ? <Table striped>
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Cidade/Estado</th>
+                            <th>Bairro/Rua</th>
+                            <th>Numero</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -102,8 +104,15 @@ const Barbearias = () => {
                                         <td>
                                             <p>{dado.localidade} / {dado.estado}</p>
                                         </td>
+                                        <td>
+                                            <p>{dado.bairro} / {dado.logradouro.length > 20 ? dado.logradouro.slice(0, 20) + "..." : dado.logradouro}</p>
+                                        </td>
+                                        <td>
+                                            <p>{dado.numero}</p>
+                                        </td>
                                         <td className="text-end d-flex gap-2 justify-content-end">
                                             <Button
+                                                size="sm"
                                                 onClick={() => barbeariaReserva(dado.id, dado.nome)}
                                                 color="primary"
                                             >RESERVAS</Button>
@@ -136,39 +145,43 @@ const Barbearias = () => {
                             }) : ""}
                         </>
                     </tbody>
-                </Table>
+                </Table> : ""}
                 {msg ? <p className={styles.erro}>{msg}</p> : ""}
                 {!removerLoading ? <Carregando /> : dados.length > 0 ? "" : <h2 className="text-center">SEM INFORMAÇÕES</h2>}
             </div>
 
-            <div className="d-flex gap-2 justify-content-center">
-                <Button
-                    color="primary"
-                    onClick={() => paginar(paginaAtual - 1)}
-                    disabled={paginaAtual === 1 ? paginaAtual : botaoDesabilitado}
-                >
-                    Anterior
-                </Button>
-                {[...Array(totalPages)].map((_, index) => (
-                    <Button
-                        color="primary"
-                        disabled={index == paginaAtual - 1 ? true : botaoDesabilitado}
-                        key={index + 1}
-                        onClick={() => paginar(index + 1)}
-                        className={paginaAtual === index + 1 ? "active" : ""}
-                    >
-                        {index + 1}
-                    </Button>
-                ))}
-                <Button
-                    color="primary"
-                    onClick={() => paginar(paginaAtual + 1)}
-                    disabled={paginaAtual === totalPages ? paginaAtual : botaoDesabilitado}
-                >
-                    Próximo
-                </Button>
-            </div>
-            {botaoDesabilitado ? <Carregando /> : ""}
+            {dados.length > 0 ?
+                <>
+                    <div className="d-flex gap-2 justify-content-center">
+                        <Button
+                            color="primary"
+                            onClick={() => paginar(paginaAtual - 1)}
+                            disabled={paginaAtual === 1 ? paginaAtual : botaoDesabilitado}
+                        >
+                            Anterior
+                        </Button>
+                        {[...Array(totalPages)].map((_, index) => (
+                            <Button
+                                color="primary"
+                                disabled={index == paginaAtual - 1 ? true : botaoDesabilitado}
+                                key={index + 1}
+                                onClick={() => paginar(index + 1)}
+                                className={paginaAtual === index + 1 ? "active" : ""}
+                            >
+                                {index + 1}
+                            </Button>
+                        ))}
+                        <Button
+                            color="primary"
+                            onClick={() => paginar(paginaAtual + 1)}
+                            disabled={paginaAtual === totalPages ? paginaAtual : botaoDesabilitado}
+                        >
+                            Próximo
+                        </Button>
+                    </div>
+                    {botaoDesabilitado ? <Carregando /> : ""}
+                </>
+                : ""}
         </Container >
     )
 }

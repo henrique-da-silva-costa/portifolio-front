@@ -68,67 +68,77 @@ const Home = () => {
                     inputs={inputs}
                 />
                 <h2>Barbearias disponiveis</h2>
-                <Table striped>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Telefone</th>
-                            <th>Cidade/Estado</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <>
-                            {dados.length > 0 ? dados.map((dado, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td>
-                                            <p><strong>{dado.nome}</strong></p>
-                                        </td>
-                                        <td>
-                                            <p>{dado.telefone}</p>
-                                        </td>
-                                        <td><p>{dado.localidade && dado.estado ? dado.localidade + "/" + dado.estado : "Não informado"} </p>
-                                        </td>
-                                        <td className="text-end">
-                                            <Button color="primary" onClick={() => { nav(`/barbearias/${dado.id}`) }}>AGENDAR HORÁRIO</Button>
-                                        </td>
-                                    </tr>
-                                )
-                            }) : ""}
-                        </>
-                    </tbody>
-                </Table>
+
+                {dados.length > 0 ?
+                    <Table striped>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Cidade/Estado</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <>
+                                {dados.length > 0 ? dados.map((dado, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td>
+                                                <p><strong>{dado.nome}</strong></p>
+                                            </td>
+                                            <td>
+                                                <p>{dado.telefone}</p>
+                                            </td>
+                                            <td><p>{dado.localidade && dado.estado ? dado.localidade + "/" + dado.estado : "Não informado"} </p>
+                                            </td>
+                                            <td className="text-end">
+                                                <Button color="primary" onClick={() => { nav(`/barbearias/${dado.id}`) }}>AGENDAR HORÁRIO</Button>
+                                            </td>
+                                        </tr>
+                                    )
+                                }) : ""}
+                            </>
+                        </tbody>
+                    </Table>
+                    : ""}
+
                 {msg ? <p className={styles.erro}>{msg}</p> : ""}
                 {!removerLoading ? <Carregando /> : dados.length > 0 ? "" : <h2 className="text-center">SEM INFORMAÇÕES</h2>}
-                <div className="d-flex gap-2 justify-content-center">
-                    <Button
-                        color="primary"
-                        onClick={() => paginar(paginaAtual - 1)}
-                        disabled={paginaAtual === 1 ? paginaAtual : botaoDesabilitado}
-                    >
-                        Anterior
-                    </Button>
-                    {[...Array(totalPages)].map((_, index) => (
-                        <Button
-                            color="primary"
-                            disabled={index == paginaAtual - 1 ? true : botaoDesabilitado}
-                            key={index + 1}
-                            onClick={() => paginar(index + 1)}
-                            className={paginaAtual === index + 1 ? "active" : ""}
-                        >
-                            {index + 1}
-                        </Button>
-                    ))}
-                    <Button
-                        color="primary"
-                        onClick={() => paginar(paginaAtual + 1)}
-                        disabled={paginaAtual === totalPages ? paginaAtual : botaoDesabilitado}
-                    >
-                        Próximo
-                    </Button>
-                </div>
-                {botaoDesabilitado ? <Carregando /> : ""}
+
+
+                {dados.length > 0 ?
+                    <>
+                        <div className="d-flex gap-2 justify-content-center">
+                            <Button
+                                color="primary"
+                                onClick={() => paginar(paginaAtual - 1)}
+                                disabled={paginaAtual === 1 ? paginaAtual : botaoDesabilitado}
+                            >
+                                Anterior
+                            </Button>
+                            {[...Array(totalPages)].map((_, index) => (
+                                <Button
+                                    color="primary"
+                                    disabled={index == paginaAtual - 1 ? true : botaoDesabilitado}
+                                    key={index + 1}
+                                    onClick={() => paginar(index + 1)}
+                                    className={paginaAtual === index + 1 ? "active" : ""}
+                                >
+                                    {index + 1}
+                                </Button>
+                            ))}
+                            <Button
+                                color="primary"
+                                onClick={() => paginar(paginaAtual + 1)}
+                                disabled={paginaAtual === totalPages ? paginaAtual : botaoDesabilitado}
+                            >
+                                Próximo
+                            </Button>
+                        </div>
+                        {botaoDesabilitado ? <Carregando /> : ""}
+                    </>
+                    : ""}
             </Container>
         </>
     )

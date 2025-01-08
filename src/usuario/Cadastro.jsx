@@ -8,8 +8,8 @@ const Cadastro = () => {
     const inputs = {
         img: null,
         nome: "",
-        senha: "",
         email: "",
+        senha: "",
         master: 0,
     }
 

@@ -31,7 +31,7 @@ const Barbearia = () => {
         <>
             <BotaoVoltar url={"/"} />
             <Container>
-                <h1>{localStorage.getItem("barbeariaNome")}</h1>
+                <h1>{localStorage.getItem("barbeariaNome").length > 80 ? localStorage.getItem("barbeariaNome").slice(0, 80) + "..." : localStorage.getItem("barbeariaNome")}</h1>
                 <Nav
                     pills
                 >

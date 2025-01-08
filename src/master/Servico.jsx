@@ -67,7 +67,7 @@ const Servico = ({ barbearia_id }) => {
                     pegarDados={pegarDados}
                 />
             </div>
-            <Table striped>
+            {servicos.length > 0 ? <Table striped>
                 <thead>
                     <tr>
                         <th>Nome</th>
@@ -105,11 +105,11 @@ const Servico = ({ barbearia_id }) => {
                         }) : ""}
                     </>
                 </tbody>
-            </Table>
+            </Table> : ""}
             {msg ? <p className={styles.erro}>{msg}</p> : ""}
             {!removerLoading ? <Carregando /> : servicos.length > 0 ? "" : <h2 className="text-center">SEM INFORMAÇÕES</h2>}
 
-            <>
+            {servicos.length > 0 ? <>
                 <div className="d-flex gap-2 justify-content-center">
                     <Button
                         color="primary"
@@ -138,8 +138,7 @@ const Servico = ({ barbearia_id }) => {
                     </Button>
                 </div>
                 {botaoDesabilitado ? <Carregando /> : ""}
-            </>
-
+            </> : ""}
         </Container >
     )
 }

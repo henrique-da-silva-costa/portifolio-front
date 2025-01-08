@@ -42,15 +42,25 @@ const ModalCadastrar = ({
     const pegarValorInput = (e) => {
         const { name, value, files } = e.target;
 
+        const errocep = {};
+
         if (name == "cep" && value.length >= 8) {
             setInputDesabilitar(true)
             setBotaoMsg("CARREGANDO...");
             setBotaoDesabilitar(true);
             setTimeout(() => {
                 axios.get(`https://viacep.com.br/ws/${value}/json/`).then((res) => {
-                    if (res.data.erro) {
-                        setMsg("CEP INVÁLIDO");
-                    }
+                    Object.entries(formularioValores).map(([key, value]) => {
+                        if (res.data.erro) {
+                            if (key == "cep") {
+                                errocep[key] = "CEP INVÁLIDO";
+                                setErros(errocep);
+                            }
+                        } else {
+                            setErros("");
+                        }
+
+                    });
 
                     const dados = Object.entries(res.data).map(([key, value]) => {
                         valorDefault(key);

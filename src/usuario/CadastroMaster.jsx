@@ -8,8 +8,8 @@ const CadastroMaster = () => {
     const inputs = {
         img: null,
         nome: "",
-        senha: "",
         email: "",
+        senha: "",
         master: 1,
     }
 

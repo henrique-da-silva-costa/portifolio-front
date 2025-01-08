@@ -12,7 +12,7 @@ export function editarColunas(col = "", tipo = {}, nomeFormulario = "") {
     }
 
     if (nomeFormulario == "cadastroUsuario") {
-        if (tipo == "nome" || tipo == "senha") {
+        if (tipo == "email" || tipo == "senha") {
             return "col-md-6"
         }
         return "col-md-12"

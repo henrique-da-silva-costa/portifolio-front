@@ -313,8 +313,6 @@ const Formularios = ({
                 setMsg("Erro interno no servidor, contate o suporte")
                 setErros("");
             }
-
-            console.log((err))
         })
 
         setErros(newErrors);

@@ -38,7 +38,7 @@ const ModalSairUsuario = () => {
                     <DropdownMenu className="mt-2 p-1">
                         <div className="d-flex flex-column align-items-center mb-2">
                             <img className="rounded-circle" src={img} alt="imagen do usuário" height={100} width={100} />
-                            <h4 className="text-center">{nome}</h4>
+                            <h4 className="text-center">{nome.length > 15 ? nome.slice(0, 15) + "..." : nome}</h4>
                         </div>
                         <div className="text-end">
                             <Button color="danger" onClick={logout}>SAIR</Button>

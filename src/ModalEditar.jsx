@@ -20,6 +20,7 @@ const ModalEditar = ({
     nomeFormulario = "",
     colunas = "",
     colunasDeCep = false,
+    colunasDeReseva = false,
     modalTelaCheia = false
 }) => {
 
@@ -40,39 +41,61 @@ const ModalEditar = ({
     }
 
     const toggleInput = () => {
-        axios.get(`http://localhost:8000/${url}`, { params: { id: id } }).then((res) => {
-            let ordenado = {
-                nome: res.data.nome,
-                telefone: res.data.telefone,
-                cep: res.data.cep,
-                estado: res.data.estado,
-                localidade: res.data.localidade,
-                bairro: res.data.bairro,
-                logradouro: res.data.logradouro,
-                numero: res.data.numero,
-                id: res.data.id,
-                usuarios_id: res.data.usuarios_id,
-            }
+        setBotaoMsg("CARREGANDO...");
+        setBotaoDesabilitar(true);
+        setTimeout(() => {
+            axios.get(`http://localhost:8000/${url}`, { params: { id: id } }).then((res) => {
+                let ordenadoReseva = {
+                    id: res.data.id,
+                    hora: res.data.hora,
+                    data: res.data.data,
+                    servico: res.data.servico_id,
+                }
 
-            setFormularioValores(colunasDeCep ? ordenado : res.data);
-            const dados = Object.entries(res.data).map(([key, value]) => {
-                return { key, value };
-            });
+                let ordenado = {
+                    nome: res.data.nome,
+                    telefone: res.data.telefone,
+                    cep: res.data.cep,
+                    estado: res.data.estado,
+                    localidade: res.data.localidade,
+                    bairro: res.data.bairro,
+                    logradouro: res.data.logradouro,
+                    numero: res.data.numero,
+                    id: res.data.id,
+                    usuarios_id: res.data.usuarios_id,
+                }
 
-            if (dados[0] ? dados[0].value : []) {
-                const dadosVarios = Object.entries(dados[0] ? dados[0].value : []).map(([key, value]) => {
+                if (colunasDeReseva) {
+                    setFormularioValores(ordenadoReseva);
+                }
+
+                if (colunasDeCep) {
+                    setFormularioValores(colunasDeCep ? ordenado : res.data);
+                }
+
+                const dados = Object.entries(colunasDeReseva ? ordenadoReseva : res.data).map(([key, value]) => {
                     return { key, value };
                 });
 
-                setFrmValorVarios(dadosVarios);
-            }
+                if (dados[0] ? dados[0].value : []) {
+                    const dadosVarios = Object.entries(dados[0] ? dados[0].value : []).map(([key, value]) => {
+                        return { key, value };
+                    });
 
-            setFrmValor(dados);
-            setModal(!modal)
+                    setFrmValorVarios(dadosVarios);
+                }
 
-        }).catch((err) => {
-            alert("Erro interno no servidor, contate o suporte");
-        })
+                setBotaoMsg(botaoAbrirNome);
+                setBotaoDesabilitar(false);
+                setFrmValor(dados);
+                setModal(!modal)
+
+            }).catch((err) => {
+                setBotaoMsg(botaoAbrirNome);
+                setBotaoDesabilitar(false);
+                alert("Erro interno no servidor, contate o suporte");
+            })
+        }, 1000);
     }
 
     const pegarValorInput = (e) => {
@@ -169,10 +192,10 @@ const ModalEditar = ({
         }
 
         if (tipo == "hora") {
-            return <select name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
+            return <select defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" value={formularioValores.tipo}>
                 <option value={""}>SELECIONE...</option>
                 {
-                    horarios ? horarios.map((h, i) => {
+                    horarios.length > 0 ? horarios.map((h, i) => {
                         return (
                             <option key={i} value={h.horario}>{h.horario}</option>
                         )
@@ -182,13 +205,15 @@ const ModalEditar = ({
         }
 
         if (tipo == "servico") {
-            return <select name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+            return <select defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
                 <option value={""}>Selecione...</option>
-                {servicos ? servicos.map((s, i) => {
-                    return (
-                        <option key={i} value={s.id}>{s.nome}</option>
-                    )
-                }) : ""}
+                {
+                    servicos.length > 0 ? servicos.map((s, i) => {
+                        return (
+                            <option key={i} value={s.id}>{s.nome}</option>
+                        )
+                    }) : ""
+                }
             </select>
         }
 
@@ -218,7 +243,6 @@ const ModalEditar = ({
 
     const editar = (e) => {
         e.preventDefault();
-
         setBotaoMsg("CARREGANDO...");
         setBotaoDesabilitar(true);
 
@@ -323,7 +347,7 @@ const ModalEditar = ({
     return (
 
         <div>
-            <Button color="success" onClick={toggleInput}>{botaoAbrirNome}</Button>
+            <Button color="success" disabled={botaoDesabilitar} onClick={toggleInput}>{botaoMsg}</Button>
             <Modal isOpen={modal} fullscreen={modalTelaCheia}>
                 <ModalHeader toggle={toggle}>{titulo}</ModalHeader>
                 <ModalBody>

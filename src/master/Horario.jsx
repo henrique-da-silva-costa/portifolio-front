@@ -69,7 +69,7 @@ const Horario = ({ barbearia_id }) => {
                     valorModal={valor}
                     url={"barbearia/cadastrar/horario"} />
             </div>
-            <Table striped>
+            {horarios.length > 0 ? <Table striped>
                 <thead>
                     <tr>
                         <th>Horario</th>
@@ -104,38 +104,43 @@ const Horario = ({ barbearia_id }) => {
                         }) : ""}
                     </>
                 </tbody>
-            </Table>
+            </Table> : ""}
+
             {msgErroGet ? <p className={styles.erro}>{msgErroGet}</p> : ""}
             {!removerLoading ? <Carregando /> : horarios.length > 0 ? "" : <h2 className="text-center">SEM INFORMAÇÕES</h2>}
 
-            <div className="d-flex gap-2 justify-content-center">
-                <Button
-                    color="primary"
-                    onClick={() => paginar(paginaAtual - 1)}
-                    disabled={paginaAtual === 1 ? paginaAtual : botaoDesabilitado}
-                >
-                    Anterior
-                </Button>
-                {[...Array(totalPages)].map((_, index) => (
-                    <Button
-                        color="primary"
-                        disabled={index == paginaAtual - 1 ? true : botaoDesabilitado}
-                        key={index + 1}
-                        onClick={() => paginar(index + 1)}
-                        className={paginaAtual === index + 1 ? "active" : ""}
-                    >
-                        {index + 1}
-                    </Button>
-                ))}
-                <Button
-                    color="primary"
-                    onClick={() => paginar(paginaAtual + 1)}
-                    disabled={paginaAtual === totalPages ? paginaAtual : botaoDesabilitado}
-                >
-                    Próximo
-                </Button>
-            </div>
-            {botaoDesabilitado ? <Carregando /> : ""}
+            {horarios.length > 0 ?
+                <>
+                    <div className="d-flex gap-2 justify-content-center">
+                        <Button
+                            color="primary"
+                            onClick={() => paginar(paginaAtual - 1)}
+                            disabled={paginaAtual === 1 ? paginaAtual : botaoDesabilitado}
+                        >
+                            Anterior
+                        </Button>
+                        {[...Array(totalPages)].map((_, index) => (
+                            <Button
+                                color="primary"
+                                disabled={index == paginaAtual - 1 ? true : botaoDesabilitado}
+                                key={index + 1}
+                                onClick={() => paginar(index + 1)}
+                                className={paginaAtual === index + 1 ? "active" : ""}
+                            >
+                                {index + 1}
+                            </Button>
+                        ))}
+                        <Button
+                            color="primary"
+                            onClick={() => paginar(paginaAtual + 1)}
+                            disabled={paginaAtual === totalPages ? paginaAtual : botaoDesabilitado}
+                        >
+                            Próximo
+                        </Button>
+                    </div>
+                    {botaoDesabilitado ? <Carregando /> : ""}
+                </>
+                : ""}
         </Container>
     )
 }
