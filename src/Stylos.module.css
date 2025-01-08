@@ -1,0 +1,43 @@
+.erro {
+  color: red;
+}
+
+.capitalize {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.logoUsuarioAbsolute {
+  position: absolute;
+  right: 0;
+  display: flex;
+  padding: 0 10px;
+}
+
+.barbeariasStilo {
+  border-radius: 5px;
+  padding: 1rem;
+  border: 1px solid;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.barbeariasStilofilho {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pix {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@media screen and (min-width: 760px) {
+  .formularioContainer {
+    width: 40%;
+  }
+}

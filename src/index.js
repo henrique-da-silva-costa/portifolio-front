@@ -1,13 +1,21 @@
 import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle"
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Provider from './contexts/Usuario';
+import MasterProvider from "./contexts/UsuarioMaster"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <MasterProvider>
+      <Provider>
+        <App />
+      </Provider>
+    </MasterProvider>
   </React.StrictMode>
 );
 
