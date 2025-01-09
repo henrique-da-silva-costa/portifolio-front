@@ -131,6 +131,10 @@ export function tiposLabel(label) {
         return "CEP"
     }
 
+    if (label == "email") {
+        return "E-mail"
+    }
+
     if (label == "emailcomfirmar") {
         return "";
     }

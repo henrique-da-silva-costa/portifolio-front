@@ -43,59 +43,60 @@ const ModalEditar = ({
     const toggleInput = () => {
         setBotaoMsg("CARREGANDO...");
         setBotaoDesabilitar(true);
-        setTimeout(() => {
-            axios.get(`http://localhost:8000/${url}`, { params: { id: id } }).then((res) => {
-                let ordenadoReseva = {
-                    id: res.data.id,
-                    hora: res.data.hora,
-                    data: res.data.data,
-                    servico: res.data.servico_id,
-                }
+        // setTimeout(() => {
+        axios.get(`http://localhost:8000/${url}`, { params: { id: id } }).then((res) => {
+            let ordenadoReseva = {
+                id: res.data.id,
+                hora: res.data.hora,
+                data: res.data.data,
+                servico: res.data.servico_id,
+                barbearia_id: res.data.barbearia_id,
+            }
 
-                let ordenado = {
-                    nome: res.data.nome,
-                    telefone: res.data.telefone,
-                    cep: res.data.cep,
-                    estado: res.data.estado,
-                    localidade: res.data.localidade,
-                    bairro: res.data.bairro,
-                    logradouro: res.data.logradouro,
-                    numero: res.data.numero,
-                    id: res.data.id,
-                    usuarios_id: res.data.usuarios_id,
-                }
+            let ordenado = {
+                nome: res.data.nome,
+                telefone: res.data.telefone,
+                cep: res.data.cep,
+                estado: res.data.estado,
+                localidade: res.data.localidade,
+                bairro: res.data.bairro,
+                logradouro: res.data.logradouro,
+                numero: res.data.numero,
+                id: res.data.id,
+                usuarios_id: res.data.usuarios_id,
+            }
 
-                if (colunasDeReseva) {
-                    setFormularioValores(ordenadoReseva);
-                }
+            if (colunasDeReseva) {
+                setFormularioValores(ordenadoReseva);
+            }
 
-                if (colunasDeCep) {
-                    setFormularioValores(colunasDeCep ? ordenado : res.data);
-                }
+            if (colunasDeCep) {
+                setFormularioValores(colunasDeCep ? ordenado : res.data);
+            }
 
-                const dados = Object.entries(colunasDeReseva ? ordenadoReseva : res.data).map(([key, value]) => {
+            const dados = Object.entries(colunasDeReseva ? ordenadoReseva : res.data).map(([key, value]) => {
+                return { key, value };
+            });
+
+            if (dados[0] ? dados[0].value : []) {
+                const dadosVarios = Object.entries(dados[0] ? dados[0].value : []).map(([key, value]) => {
                     return { key, value };
                 });
 
-                if (dados[0] ? dados[0].value : []) {
-                    const dadosVarios = Object.entries(dados[0] ? dados[0].value : []).map(([key, value]) => {
-                        return { key, value };
-                    });
+                setFrmValorVarios(dadosVarios);
+            }
 
-                    setFrmValorVarios(dadosVarios);
-                }
+            setBotaoMsg(botaoAbrirNome);
+            setBotaoDesabilitar(false);
+            setFrmValor(dados);
+            setModal(!modal)
 
-                setBotaoMsg(botaoAbrirNome);
-                setBotaoDesabilitar(false);
-                setFrmValor(dados);
-                setModal(!modal)
-
-            }).catch((err) => {
-                setBotaoMsg(botaoAbrirNome);
-                setBotaoDesabilitar(false);
-                alert("Erro interno no servidor, contate o suporte");
-            })
-        }, 1000);
+        }).catch((err) => {
+            setBotaoMsg(botaoAbrirNome);
+            setBotaoDesabilitar(false);
+            alert("Erro interno no servidor, contate o suporte");
+        })
+        // }, 200);
     }
 
     const pegarValorInput = (e) => {

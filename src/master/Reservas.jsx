@@ -25,6 +25,7 @@ const Reservas = () => {
         data: "",
         hora: "",
         servico: "",
+        barbearia_id: barbearia_id,
     }
 
     const pegarDados = (page) => {
