@@ -91,6 +91,7 @@ const Horario = ({ barbearia_id }) => {
                                             url={"horario"}
                                             urlEditar={"barbearia/horarios/editar"}
                                             pegarDados={pegarDados}
+                                            colunasDeHorario={true}
                                         />
                                         <ModalExcluir url={"barbearia/horarios/excluir"}
                                             id={horario.id}

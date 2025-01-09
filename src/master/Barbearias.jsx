@@ -80,7 +80,7 @@ const Barbearias = () => {
             <CadastrarBarbearia pegarDados={pegarDados} className="text-end" />
             <div className="row">
                 {dados.length > 0 ?
-                    <Table responsive striped>
+                    <Table responsive size="sm" striped>
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -111,14 +111,14 @@ const Barbearias = () => {
                                             <td>
                                                 <p>{dado.numero}</p>
                                             </td>
-                                            <td className="align-items-center d-flex gap-2 justify-content-end">
+                                            <td className="align-items-center d-flex gap-2 justify-content-center">
                                                 <Button
-                                                    size="sm"
                                                     onClick={() => barbeariaReserva(dado.id, dado.nome)}
                                                     color="primary"
                                                 >RESERVAS</Button>
                                                 <Button
-                                                    color="primary" size="sm" onClick={() => barbeariaInformacao(dado.id, dado.nome)}
+                                                    color="primary"
+                                                    onClick={() => barbeariaInformacao(dado.id, dado.nome)}
                                                 >VAR MAIS
                                                 </Button>
                                                 <ModalEditar

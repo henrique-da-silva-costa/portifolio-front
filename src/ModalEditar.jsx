@@ -21,6 +21,8 @@ const ModalEditar = ({
     colunas = "",
     colunasDeCep = false,
     colunasDeReseva = false,
+    colunasDeHorario = false,
+    colunasDeServico = false,
     modalTelaCheia = false
 }) => {
 
@@ -43,8 +45,10 @@ const ModalEditar = ({
     const toggleInput = () => {
         setBotaoMsg("CARREGANDO...");
         setBotaoDesabilitar(true);
-        // setTimeout(() => {
         axios.get(`http://localhost:8000/${url}`, { params: { id: id } }).then((res) => {
+
+            console.log(res.data);
+
             let ordenadoReseva = {
                 id: res.data.id,
                 hora: res.data.hora,
@@ -53,7 +57,7 @@ const ModalEditar = ({
                 barbearia_id: res.data.barbearia_id,
             }
 
-            let ordenado = {
+            let ordenadoCep = {
                 nome: res.data.nome,
                 telefone: res.data.telefone,
                 cep: res.data.cep,
@@ -66,17 +70,49 @@ const ModalEditar = ({
                 usuarios_id: res.data.usuarios_id,
             }
 
+            let ordenadoServico = {
+                id: res.data.id,
+                nome: res.data.nome,
+                valor: res.data.valor,
+                barbearia_id: res.data.barbearia_id,
+            }
+
+            let ordenadoHorario = {
+                id: res.data.id,
+                horario: res.data.horario,
+                barbearia_id: res.data.barbearia_id,
+
+            }
+
+            let dados = [];
+
             if (colunasDeReseva) {
-                setFormularioValores(ordenadoReseva);
+                setFormularioValores(colunasDeReseva ? ordenadoReseva : res.data);
+                dados = Object.entries(colunasDeReseva ? ordenadoReseva : res.data).map(([key, value]) => {
+                    return { key, value };
+                });
             }
 
             if (colunasDeCep) {
-                setFormularioValores(colunasDeCep ? ordenado : res.data);
+                setFormularioValores(colunasDeCep ? ordenadoCep : res.data);
+                dados = Object.entries(colunasDeCep ? ordenadoCep : res.data).map(([key, value]) => {
+                    return { key, value };
+                });
             }
 
-            const dados = Object.entries(colunasDeReseva ? ordenadoReseva : res.data).map(([key, value]) => {
-                return { key, value };
-            });
+            if (colunasDeHorario) {
+                setFormularioValores(colunasDeHorario ? ordenadoHorario : res.data);
+                dados = Object.entries(colunasDeHorario ? ordenadoHorario : res.data).map(([key, value]) => {
+                    return { key, value };
+                });
+            }
+
+            if (colunasDeServico) {
+                setFormularioValores(colunasDeServico ? ordenadoServico : res.data);
+                dados = Object.entries(colunasDeServico ? ordenadoServico : res.data).map(([key, value]) => {
+                    return { key, value };
+                });
+            }
 
             if (dados[0] ? dados[0].value : []) {
                 const dadosVarios = Object.entries(dados[0] ? dados[0].value : []).map(([key, value]) => {
@@ -86,13 +122,13 @@ const ModalEditar = ({
                 setFrmValorVarios(dadosVarios);
             }
 
-            setBotaoMsg(botaoAbrirNome);
+            setBotaoMsg("EDITAR");
             setBotaoDesabilitar(false);
             setFrmValor(dados);
             setModal(!modal)
 
         }).catch((err) => {
-            setBotaoMsg(botaoAbrirNome);
+            setBotaoMsg("EDITAR");
             setBotaoDesabilitar(false);
             alert("Erro interno no servidor, contate o suporte");
         })
@@ -348,7 +384,7 @@ const ModalEditar = ({
     return (
 
         <div>
-            <Button color="success" size="sm" disabled={botaoDesabilitar} onClick={toggleInput}>{botaoMsg}</Button>
+            <Button color="success" disabled={botaoDesabilitar} onClick={toggleInput}>{botaoMsg}</Button>
             <Modal isOpen={modal} fullscreen={modalTelaCheia}>
                 <ModalHeader toggle={toggle}>{titulo}</ModalHeader>
                 <ModalBody>

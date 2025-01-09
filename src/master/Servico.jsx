@@ -93,6 +93,7 @@ const Servico = ({ barbearia_id }) => {
                                             urlEditar={"barbearia/servicos/editar"}
                                             placeholderNomeTipo={"nomeservico"}
                                             pegarDados={pegarDados}
+                                            colunasDeServico={true}
                                         />
                                         <ModalExcluir url={"barbearia/servicos/excluir"}
                                             id={servico.id}
