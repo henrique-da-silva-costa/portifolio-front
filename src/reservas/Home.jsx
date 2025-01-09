@@ -93,7 +93,7 @@ const Home = () => {
                                             <td><p>{dado.localidade && dado.estado ? dado.localidade + "/" + dado.estado : "Não informado"} </p>
                                             </td>
                                             <td className="text-end">
-                                                <Button color="primary" onClick={() => { nav(`/barbearias/${dado.id}`) }}>AGENDAR HORÁRIO</Button>
+                                                <Button size="sm" color="primary" onClick={() => { nav(`/barbearias/${dado.id}`) }}>AGENDAR HORÁRIO</Button>
                                             </td>
                                         </tr>
                                     )

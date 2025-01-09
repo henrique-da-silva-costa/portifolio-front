@@ -301,7 +301,7 @@ const ModalEditar = ({
                 }
 
                 if (valoresNumericos.includes(key) && value != Number) {
-                    newErrors[key] = "Esse campo deve ser numerico"
+                    newErrors[key] = "Esse campo deve ser numérico"
                 }
 
                 if (err.response.data) {
