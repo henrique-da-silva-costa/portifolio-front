@@ -74,7 +74,7 @@ const Formularios = ({
         const tiposSenha = ["senha", "novasenha", "confirmasenha"];
 
         if (tipo == "hora") {
-            return <select name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
                 <option value={""}>SELECIONE...</option>
                 {
                     horarios ? horarios.map((h, i) => {
@@ -87,7 +87,7 @@ const Formularios = ({
         }
 
         if (tipo == "servico") {
-            return <select name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
                 <option value={""}>Selecione...</option>
                 {servicos ? servicos.map((s, i) => {
                     return (
@@ -104,6 +104,7 @@ const Formularios = ({
                 value={formularioValores.tipo}
                 type={tipos(tipo)}
                 onChange={pegarValorInput}
+                disabled={botaoDesabilitar}
             />
         }
 
@@ -116,6 +117,7 @@ const Formularios = ({
                     value={formularioValores.tipo}
                     type={tipoSenha}
                     onChange={pegarValorInput}
+                    disabled={botaoDesabilitar}
                 />
                 <Button color="transparent" className="border border-0" onClick={() => mudarTipoSenha(tipo)}><FaEye /></Button>
             </div>
@@ -131,6 +133,7 @@ const Formularios = ({
             value={formularioValores.tipo}
             type={tipos(tipo)}
             onChange={pegarValorInput}
+            disabled={botaoDesabilitar}
         />
     }
 

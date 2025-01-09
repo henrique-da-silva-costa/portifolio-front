@@ -97,7 +97,7 @@ const Servico = ({ barbearia_id }) => {
                                         />
                                         <ModalExcluir url={"barbearia/servicos/excluir"}
                                             id={servico.id}
-                                            titulo={`Excluir ${servico.nome}`}
+                                            titulo={`Excluir serviço: ${servico.nome}`}
                                             pegarDados={pegarDados}
                                         />
                                     </td>

@@ -181,6 +181,8 @@ export function tipoInputPlaceholder(tipo, tipoplaceholder = "") {
         },
         email: "Informe seu E-mail",
         senha: "Informe a sua senha",
+        novasenha: "Informe a sua nova senha",
+        confirmasenha: "Informe a sua nova senha",
         nomebarbearia: "Informe o nome da barbearia",
         nomeservico: "Informe o nome do serviço",
         localidade: "Informe a cidade",

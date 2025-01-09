@@ -28,7 +28,6 @@ const ModalCadastrar = ({
     const [erros, setErros] = useState({});
     const [formularioValores, setFormularioValores] = useState(inputs);
     const [botaoDesabilitar, setBotaoDesabilitar] = useState(false);
-    const [inputDesabilitar, setInputDesabilitar] = useState(false);
     const [botaoMsg, setBotaoMsg] = useState(botaoformulario);
     const nav = useNavigate();
 
@@ -45,7 +44,7 @@ const ModalCadastrar = ({
         const errocep = {};
 
         if (name == "cep" && value.length >= 8) {
-            setInputDesabilitar(true)
+            setBotaoDesabilitar(true)
             setBotaoMsg("CARREGANDO...");
             setBotaoDesabilitar(true);
             setTimeout(() => {
@@ -76,13 +75,13 @@ const ModalCadastrar = ({
                     });
                     setBotaoMsg(botaoformulario);
                     setBotaoDesabilitar(false);
-                    setInputDesabilitar(false)
+                    setBotaoDesabilitar(false)
                     setFormularioValores(formularioValores);
 
                 }).catch((err) => {
                     setBotaoMsg(botaoformulario);
                     setBotaoDesabilitar(false);
-                    setInputDesabilitar(false)
+                    setBotaoDesabilitar(false)
                     if (err.erro) {
                         setMsg("CEP INVÁLIDO");
                     }
@@ -111,7 +110,7 @@ const ModalCadastrar = ({
         if (tipo == "horario") {
             return <select defaultValue={formularioValores.horario
 
-            } name={tipo} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
+            } name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
                 <option value="" >SELECIONE</option>
                 <option value="08:00:00">08:00</option>
                 <option value="09:00:00">09:00</option>
@@ -128,7 +127,7 @@ const ModalCadastrar = ({
         }
 
         if (tipo == "hora") {
-            return <select name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
                 <option value={""}>SELECIONE...</option>
                 {
                     horarios.length > 0 ? horarios.map((h, i) => {
@@ -141,8 +140,8 @@ const ModalCadastrar = ({
         }
 
         if (tipo == "servico") {
-            return <select name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
-                <option value={""}>Selecione...</option>
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+                <option value={""}>SELECIONE...</option>
                 {servicos.length > 0 ? servicos.map((s, i) => {
                     return (
                         <option key={i} value={s.id}>{s.nome}</option>
@@ -154,7 +153,7 @@ const ModalCadastrar = ({
         if (tipo == "img") {
             return <Input
                 placeholder={tipoInputPlaceholder(tipo)}
-                disabled={inputDesabilitar}
+                disabled={botaoDesabilitar}
                 defaultValue={valorDefault(tipo)}
                 name={tipo}
                 accept="image/*"
@@ -168,7 +167,7 @@ const ModalCadastrar = ({
             placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
             className="form-control"
             mask={tipoInputMaskara(tipo)}
-            disabled={inputDesabilitar}
+            disabled={botaoDesabilitar}
             name={tipo}
             value={valorDefault(tipo)}
             type={tipos(tipo)}

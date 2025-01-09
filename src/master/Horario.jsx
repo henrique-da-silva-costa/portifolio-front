@@ -95,7 +95,7 @@ const Horario = ({ barbearia_id }) => {
                                         />
                                         <ModalExcluir url={"barbearia/horarios/excluir"}
                                             id={horario.id}
-                                            titulo={`Excluir ${horario.horario}`}
+                                            titulo={`Excluir horário: ${horario.horario}`}
                                             pegarDados={pegarDados}
                                         />
                                     </td>

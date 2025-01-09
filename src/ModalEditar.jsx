@@ -32,7 +32,6 @@ const ModalEditar = ({
     const [modal, setModal] = useState(false);
     const [erros, setErros] = useState({});
     const [botaoDesabilitar, setBotaoDesabilitar] = useState(false);
-    const [inputDesabilitar, setInputDesabilitar] = useState(false);
     const [botaoMsg, setBotaoMsg] = useState(botaoformulario);
     const [formularioValores, setFormularioValores] = useState(inputs);
 
@@ -139,7 +138,7 @@ const ModalEditar = ({
         const { name, value, files } = e.target;
 
         if (name == "cep" && value.length >= 8) {
-            setInputDesabilitar(true)
+            setBotaoDesabilitar(true)
             setBotaoMsg("CARREGANDO...");
             setBotaoDesabilitar(true);
             setTimeout(() => {
@@ -158,13 +157,13 @@ const ModalEditar = ({
                     });
                     setBotaoMsg(botaoformulario);
                     setBotaoDesabilitar(false);
-                    setInputDesabilitar(false)
+                    setBotaoDesabilitar(false)
                     setFormularioValores(formularioValores);
 
                 }).catch((err) => {
                     setBotaoMsg(botaoformulario);
                     setBotaoDesabilitar(false);
-                    setInputDesabilitar(false)
+                    setBotaoDesabilitar(false)
                     if (err.erro) {
                         setMsg("CEP INVÁLIDO");
                     }
@@ -212,7 +211,7 @@ const ModalEditar = ({
 
     const tipoInput = (tipo) => {
         if (tipo == "horario") {
-            return <select defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
+            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
                 <option value="" >SELECIONE</option>
                 <option value="08:00:00">08:00</option>
                 <option value="09:00:00">09:00</option>
@@ -229,7 +228,7 @@ const ModalEditar = ({
         }
 
         if (tipo == "hora") {
-            return <select defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" value={formularioValores.tipo}>
+            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" value={formularioValores.tipo}>
                 <option value={""}>SELECIONE...</option>
                 {
                     horarios.length > 0 ? horarios.map((h, i) => {
@@ -242,8 +241,8 @@ const ModalEditar = ({
         }
 
         if (tipo == "servico") {
-            return <select defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
-                <option value={""}>Selecione...</option>
+            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+                <option value={""}>SELECIONE...</option>
                 {
                     servicos.length > 0 ? servicos.map((s, i) => {
                         return (
@@ -256,7 +255,7 @@ const ModalEditar = ({
 
         if (tipo == "img") {
             return <Input
-                disabled={inputDesabilitar}
+                disabled={botaoDesabilitar}
                 name={tipo}
                 accept="image/*"
                 value={formularioValores.tipo}
@@ -269,7 +268,7 @@ const ModalEditar = ({
             className="form-control"
             placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
             mask={tipoInputMaskara(tipo)}
-            disabled={inputDesabilitar}
+            disabled={botaoDesabilitar}
             name={tipo}
             defaultValue={valorDefault(tipo)}
             value={formularioValores.cep ? valorDefaultCep(tipo) : formularioValores.tipo}
