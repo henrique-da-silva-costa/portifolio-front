@@ -49,7 +49,7 @@ const ServicoReserva = ({ barbearia_id }) => {
     return (
         <Container>
             {servicos.length > 0 ?
-                <Table striped>
+                <Table responsive striped>
                     <thead>
                         <tr>
                             <th>Nome</th>

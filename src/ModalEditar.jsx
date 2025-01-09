@@ -348,7 +348,7 @@ const ModalEditar = ({
     return (
 
         <div>
-            <Button color="success" disabled={botaoDesabilitar} onClick={toggleInput}>{botaoMsg}</Button>
+            <Button color="success" size="sm" disabled={botaoDesabilitar} onClick={toggleInput}>{botaoMsg}</Button>
             <Modal isOpen={modal} fullscreen={modalTelaCheia}>
                 <ModalHeader toggle={toggle}>{titulo}</ModalHeader>
                 <ModalBody>

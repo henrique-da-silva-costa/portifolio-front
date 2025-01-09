@@ -345,8 +345,8 @@ const Formularios = ({
                 </div>
             </form >
             {loginBotoes ? <div className="d-flex gap-2 mt-2">
-                <Button disabled={botaoDesabilitar} onClick={() => nav(tipoLogin == "login" ? "/cadastro" : "/cadastrobarbeiro")}> CADASTRE - SE</Button >
-                <Button disabled={botaoDesabilitar} onClick={() => nav("/recuperarsenha/email")}>RECUPERAR SENHA</Button>
+                <Button size="sm" disabled={botaoDesabilitar} onClick={() => nav(tipoLogin == "login" ? "/cadastro" : "/cadastrobarbeiro")}> CADASTRE - SE</Button >
+                <Button size="sm" disabled={botaoDesabilitar} onClick={() => nav("/recuperarsenha/email")}>RECUPERAR SENHA</Button>
             </div > : ""}
         </>
     )

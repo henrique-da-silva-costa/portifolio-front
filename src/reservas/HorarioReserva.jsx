@@ -22,7 +22,7 @@ const HorarioReserva = ({ barbearia_id }) => {
     return (
         <>
             {horarios.length > 0 ?
-                <Table striped >
+                <Table responsive striped >
                     <thead>
                         <tr>
                             <th>horário</th>

@@ -46,7 +46,7 @@ const Barbearia = () => {
             <Container>
                 <h1>{barbeariaNome ? barbeariaNome.nome : ""}</h1>
 
-                <div className="d-flex justify-content-end">
+                <div className="d-flex mb-2 justify-content-end">
                     <Reserva barbearia_id={id} />
                 </div>
 

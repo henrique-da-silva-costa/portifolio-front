@@ -68,7 +68,7 @@ const Horario = ({ barbearia_id }) => {
                     valorModal={valor}
                     url={"barbearia/cadastrar/horario"} />
             </div>
-            {horarios.length > 0 ? <Table striped>
+            {horarios.length > 0 ? <Table responsive striped>
                 <thead>
                     <tr>
                         <th>Horário</th>

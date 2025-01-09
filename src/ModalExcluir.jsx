@@ -41,7 +41,7 @@ const ModalExcluir = ({ titulo = "EXCLUIR", id = null, url, pegarDados = () => {
 
     return (
         <div>
-            <Button color="danger" onClick={toggle}>EXCLUIR</Button>
+            <Button color="danger" size="sm" onClick={toggle}>EXCLUIR</Button>
             <Modal isOpen={modal}>
                 <ModalHeader toggle={toggle}>{titulo}</ModalHeader>
                 <ModalBody className="d-flex gap-2 flex-column justify-content-end">

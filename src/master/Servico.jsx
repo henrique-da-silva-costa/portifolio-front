@@ -67,7 +67,7 @@ const Servico = ({ barbearia_id }) => {
                     pegarDados={pegarDados}
                 />
             </div>
-            {servicos.length > 0 ? <Table striped>
+            {servicos.length > 0 ? <Table responsive striped>
                 <thead>
                     <tr>
                         <th>Nome</th>

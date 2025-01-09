@@ -80,7 +80,7 @@ const Reservas = () => {
             <Container className="mt-2">
                 <h1>RESERVAS</h1>
                 <h4 className="mt-3">{barbearia_nome}</h4>
-                {reservas.length > 0 ? <Table striped>
+                {reservas.length > 0 ? <Table responsive striped>
                     <thead>
                         <tr>
                             <th>Usuário</th>

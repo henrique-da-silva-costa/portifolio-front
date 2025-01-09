@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { UsuarioMaster } from '../contexts/UsuarioMaster';
 import Barbearia from '../master/Barbearia';
 import ModalSairUsuario from '../ModalSairUsuario';
 import Barbearias from '../master/Barbearias';
 import Reservas from '../master/Reservas';
+import Naoencontrado from "../Naoencontrado"
 
 const MasterRotas = () => {
     return (
@@ -17,6 +17,7 @@ const MasterRotas = () => {
                     <Route path="/" element={<Barbearias />} />
                     <Route path="/barbearia" element={<Barbearia />} />
                     <Route path="/barbearia/reserva" element={<Reservas />} />
+                    <Route path='*' element={<Naoencontrado />} />
                 </Routes>
             </BrowserRouter>
         </>

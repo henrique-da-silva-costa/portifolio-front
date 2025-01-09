@@ -70,7 +70,7 @@ const Home = () => {
                 <h2>Barbearias disponíveis</h2>
 
                 {dados.length > 0 ?
-                    <Table striped>
+                    <Table responsive striped>
                         <thead>
                             <tr>
                                 <th>Nome</th>

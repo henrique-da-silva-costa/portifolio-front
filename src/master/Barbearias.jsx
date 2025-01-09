@@ -75,77 +75,78 @@ const Barbearias = () => {
     }
 
     return (
-        <Container>
+        <Container className="mt-3">
             <h1 className="mt-3">BARBEARIAS</h1>
             <CadastrarBarbearia pegarDados={pegarDados} className="text-end" />
             <div className="row">
-                {dados.length > 0 ? <Table striped>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Telefone</th>
-                            <th>Cidade/Estado</th>
-                            <th>Bairro/Rua</th>
-                            <th>Numero</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <>
-                            {dados.length > 0 ? dados.map((dado, i) => {
-                                return (
-                                    <tr key={i}>
-                                        <td>
-                                            <p>{dado.nome}</p>
-                                        </td>
-                                        <td>
-                                            <p>{dado.telefone}</p>
-                                        </td>
-                                        <td>
-                                            <p>{dado.localidade} / {dado.estado}</p>
-                                        </td>
-                                        <td>
-                                            <p>{dado.bairro} / {dado.logradouro.length > 20 ? dado.logradouro.slice(0, 20) + "..." : dado.logradouro}</p>
-                                        </td>
-                                        <td>
-                                            <p>{dado.numero}</p>
-                                        </td>
-                                        <td className="text-end d-flex gap-2 justify-content-end">
-                                            <Button
-                                                size="sm"
-                                                onClick={() => barbeariaReserva(dado.id, dado.nome)}
-                                                color="primary"
-                                            >RESERVAS</Button>
-                                            <Button
-                                                color="primary" size="sm" onClick={() => barbeariaInformacao(dado.id, dado.nome)}
-                                            >MAIS INFORMAÇÕES
-                                            </Button>
-                                            <ModalEditar
-                                                colunas={"col-md-6"}
-                                                nomeFormulario={"editarBarbearia"}
-                                                titulo="EDITAR BARBEARIA"
-                                                inputs={inputs}
-                                                botaoformulario={"EDITAR"}
-                                                id={dado.id}
-                                                url={"barbearia"}
-                                                pegarDados={pegarDados}
-                                                urlEditar={"barbearia/editar"}
-                                                colunasDeCep={true}
-                                                modalTelaCheia={true}
-                                            />
-                                            <ModalExcluir
-                                                url={"barbearia/excluir"}
-                                                id={dado.id}
-                                                titulo={`Excluir barbearia ${dado.nome}`}
-                                                pegarDados={pegarDados}
-                                            />
-                                        </td>
-                                    </tr>
-                                )
-                            }) : ""}
-                        </>
-                    </tbody>
-                </Table> : ""}
+                {dados.length > 0 ?
+                    <Table responsive striped>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Cidade/Estado</th>
+                                <th>Bairro/Rua</th>
+                                <th>Numero</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <>
+                                {dados.length > 0 ? dados.map((dado, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td>
+                                                <p>{dado.nome}</p>
+                                            </td>
+                                            <td>
+                                                <p>{dado.telefone}</p>
+                                            </td>
+                                            <td>
+                                                <p>{dado.localidade} / {dado.estado}</p>
+                                            </td>
+                                            <td>
+                                                <p>{dado.bairro} / {dado.logradouro.length > 20 ? dado.logradouro.slice(0, 20) + "..." : dado.logradouro}</p>
+                                            </td>
+                                            <td>
+                                                <p>{dado.numero}</p>
+                                            </td>
+                                            <td className="align-items-center d-flex gap-2 justify-content-end">
+                                                <Button
+                                                    size="sm"
+                                                    onClick={() => barbeariaReserva(dado.id, dado.nome)}
+                                                    color="primary"
+                                                >RESERVAS</Button>
+                                                <Button
+                                                    color="primary" size="sm" onClick={() => barbeariaInformacao(dado.id, dado.nome)}
+                                                >VAR MAIS
+                                                </Button>
+                                                <ModalEditar
+                                                    colunas={"col-md-6"}
+                                                    nomeFormulario={"editarBarbearia"}
+                                                    titulo="EDITAR BARBEARIA"
+                                                    inputs={inputs}
+                                                    botaoformulario={"EDITAR"}
+                                                    id={dado.id}
+                                                    url={"barbearia"}
+                                                    pegarDados={pegarDados}
+                                                    urlEditar={"barbearia/editar"}
+                                                    colunasDeCep={true}
+                                                    modalTelaCheia={true}
+                                                />
+                                                <ModalExcluir
+                                                    url={"barbearia/excluir"}
+                                                    id={dado.id}
+                                                    titulo={`Excluir barbearia ${dado.nome}`}
+                                                    pegarDados={pegarDados}
+                                                />
+                                            </td>
+                                        </tr>
+                                    )
+                                }) : ""}
+                            </>
+                        </tbody>
+                    </Table> : ""}
                 {msg ? <p className={styles.erro}>{msg}</p> : ""}
                 {!removerLoading ? <Carregando /> : dados.length > 0 ? "" : <h2 className="text-center">SEM INFORMAÇÕES</h2>}
             </div>
