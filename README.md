@@ -33,7 +33,7 @@ Tela de login de usuário normal
 
 ![Captura de Tela (63)](https://github.com/user-attachments/assets/2ee10c86-0479-4eb6-b932-fe5f7a9cca00)
 
-Nessa tela lista todas as barbearias disponíveis e tem um filtro por CEP, Estado e cidade
+Essa tela lista todas as barbearias disponíveis e tem um filtro por CEP, Estado e cidade
 
 E também aqui você pode ir para a página de agendamento clicando no botão AGENDAR HORÁRIO.
 
