@@ -5,11 +5,11 @@
 
 Esse projeto é um sistema voltado par barbearias.
 
-Nesse sitema você pode criar um usuário master (barbeiro) e assim você consegue cadastrar barbearias e adiministralas, como por exemplo, modificar, exluir e adicionar serviços e hoários a suas barbearias cadastradas pelo seu usuário.
+Nesse sistema você pode criar um usuário master (barbeiro) e assim você consegue cadastrar barbearias e administrá-las como, por exemplo, modificar, excluir e adicionar serviços e horários a suas barbearias cadastradas pelo seu usuário.
 
-E você tambem pode criar um usuario comun(cliente) que pode fazer a reserva nas barbearias disponiveis, que são as que tem horarios e serviços cadastrados.
+E você também pode criar um usuário comum(cliente) que pode fazer a reserva nas barbearias disponíveis, que são as que tem horários e serviços cadastrados.
 
-Nesse sistema na parte de fazer a reserva tem uma integração de pagamento usando a API do PagSeguro mas não esta homologada, sendo assim faz o pagamento mas não é pago realmente só é aprovado dentro do ambiente do PagSeguro que eu tenho acesso.
+Nesse sistema na parte de fazer a reserva tem uma integração de pagamento usando a API do PagSeguro, mas não está homologada, sendo assim faz o pagamento, mas não é pago realmente só é aprovado dentro do ambiente do PagSeguro que eu tenho acesso.
 
 ## TELAS
 
