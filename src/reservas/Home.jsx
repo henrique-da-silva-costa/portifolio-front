@@ -67,7 +67,7 @@ const Home = () => {
                     dados={setDados}
                     inputs={inputs}
                 />
-                <h2>Barbearias disponiveis</h2>
+                <h2>Barbearias disponíveis</h2>
 
                 {dados.length > 0 ?
                     <Table striped>

@@ -8,7 +8,6 @@ import ModalCadastrar from '../ModalCadastrar';
 import styles from "../Stylos.module.css";
 
 const Horario = ({ barbearia_id }) => {
-
     const [horarios, setHorarios] = useState([]);
     const [msg] = useState("");
     const [msgErroGet, setMsgErroGet] = useState("");
@@ -61,8 +60,8 @@ const Horario = ({ barbearia_id }) => {
             <div className="text-end">
                 <ModalCadastrar
                     pegarDados={pegarDados}
-                    titulo={"CADASTRAR HORARIO"}
-                    botaoAbrirNome={"CADASTRAR HORARIO"}
+                    titulo={"CADASTRAR HORÁRIO"}
+                    botaoAbrirNome={"CADASTRAR HORÁRIO"}
                     botaoformulario={"CADASTRAR"}
                     inputs={inputs}
                     msgerro={msg}
@@ -72,7 +71,7 @@ const Horario = ({ barbearia_id }) => {
             {horarios.length > 0 ? <Table striped>
                 <thead>
                     <tr>
-                        <th>Horario</th>
+                        <th>Horário</th>
                         <th></th>
                     </tr>
                 </thead>

@@ -40,7 +40,7 @@ const Barbearia = () => {
                         active={ativoHorario}
                         onClick={horario}
                     >
-                        HORARIO
+                        HORÁRIO
                     </NavLink>
                     <NavLink
                         type="button"

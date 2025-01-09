@@ -135,6 +135,10 @@ export function tiposLabel(label) {
         return "E-mail"
     }
 
+    if (label == "servico") {
+        return "serviço"
+    }
+
     if (label == "emailcomfirmar") {
         return "";
     }
@@ -177,16 +181,16 @@ export function tipoInputPlaceholder(tipo, tipoplaceholder = "") {
         },
         email: "Informe seu E-mail",
         senha: "Informe a sua senha",
-        nomebarbearia: "Informe o nome da sua barbearia",
+        nomebarbearia: "Informe o nome da barbearia",
         nomeservico: "Informe o nome do serviço",
-        localidade: "Informe o nome da sua cidade",
-        filtroCidade: "Informe o nome da sua cidade",
-        filtroEstado: "Informe o seu estado",
+        localidade: "Informe a cidade",
+        filtroCidade: "Informe a cidade",
+        filtroEstado: "Informe o estado",
         filtroCep: "99999-999",
-        estado: "Informe o seu estado",
-        logradouro: "Informe o nome da sua rua",
-        bairro: "Informe o nome do seu bairro",
-        numero: "Informe o número do seu endereço",
+        estado: "Informe o estado",
+        logradouro: "Informe o nome da rua",
+        bairro: "Informe o nome do bairro",
+        numero: "Informe o número do endereço",
         number: "Número do cartão",
         cep: "99999-999",
         valor: "Informe o valor do serviço",

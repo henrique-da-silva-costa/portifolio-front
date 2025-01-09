@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Carregando from '../Carregando';
+import { Table } from 'reactstrap';
 
 const HorarioReserva = ({ barbearia_id }) => {
     const [horarios, setHorarios] = useState([]);
@@ -20,13 +21,26 @@ const HorarioReserva = ({ barbearia_id }) => {
 
     return (
         <>
-            {horarios.length > 0 ? horarios.map((horario, i) => {
-                return (
-                    <div key={i}>
-                        <h4>{horario.horario}</h4>
-                    </div>
-                )
-            }) : ""}
+            {horarios.length > 0 ?
+                <Table striped >
+                    <thead>
+                        <tr>
+                            <th>horário</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <>
+                            {horarios.length > 0 ? horarios.map((horario, i) => {
+                                return (
+                                    <tr key={i}>
+                                        <td>{horario.horario}</td>
+                                    </tr>
+                                )
+                            }) : ""}
+                        </>
+                    </tbody>
+                </Table >
+                : ""}
             {!removerLoading ? <Carregando /> : horarios.length > 0 ? "" : <h2 className="text-center">SEM INFORMAÇÕES</h2>}
         </>
     )

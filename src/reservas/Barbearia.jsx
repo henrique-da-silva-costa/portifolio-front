@@ -59,7 +59,7 @@ const Barbearia = () => {
                         active={ativoHorario}
                         onClick={horario}
                     >
-                        HORARIO
+                        HORÁRIO
                     </NavLink>
                     <NavLink
                         type="button"
@@ -70,10 +70,12 @@ const Barbearia = () => {
                     </NavLink>
                 </Nav>
 
-                <div className="bg-light border border-dark border-2 rounded-2 p-2 mt-2">
+                <div>
                     {msg ? <p className={styles.erro}>{msg}</p> : ""}
                     {dado}
                 </div>
+
+
             </Container>
         </>
     )
