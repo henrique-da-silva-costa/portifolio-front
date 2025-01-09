@@ -3,7 +3,7 @@
 
 ## DESCRIÇÃO
 
-Esse projeto é um sistema voltado par barbearias.
+Esse projeto é um sistema voltado para barbearias.
 
 Nesse sistema você pode criar um usuário master (barbeiro) e assim você consegue cadastrar barbearias e administrá-las como, por exemplo, modificar, excluir e adicionar serviços e horários a suas barbearias cadastradas pelo seu usuário.
 
@@ -33,7 +33,7 @@ E também aqui você pode ir para a página de agendamento clicando no botão AG
 
 ![Captura de Tela (65)](https://github.com/user-attachments/assets/56e635f8-e44f-411a-8438-4392adf21d96)
 
-Nessas telas você pede ver os horários e serviços disponíveis para reserva
+Nessas telas você pode ver os horários e serviços disponíveis para reserva
 
 ### Reserva
 
@@ -45,7 +45,7 @@ Nessa mesma tela, ao clicar no botão AGENDAR HORÁRIO, você pode fazer o agend
 
 ![Captura de Tela (68)](https://github.com/user-attachments/assets/bfaecc55-dc81-4386-ab94-249dcb36d28c)
 
-Nesse tela é onde você pode realizar o pagamento
+Nessa tela é onde você pode realizar o pagamento
 
 ### Login barbeiro
 
