@@ -29,7 +29,7 @@ E também aqui você pode ir para a página de agendamento clicando no botão AG
 
 ### Reserva - horário/serviço
 
-![Captura de Tela (44)](https://github.com/user-attachments/assets/8fe30630-5c35-4f1a-bd39-05ae2b8521ab)
+![Captura de Tela (64)](https://github.com/user-attachments/assets/ef9dbda7-e0d7-48f2-8734-f42d00f3c76d)
 
 ![Captura de Tela (65)](https://github.com/user-attachments/assets/56e635f8-e44f-411a-8438-4392adf21d96)
 
