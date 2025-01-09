@@ -1,6 +1,16 @@
 
 # Projeto barbearias FRONT END
 
+## Para inicar o projeto
+
+Para rodar é necessário ter o NODE-JS instalado em sua máquina e ter o back-end baixado e rodando.
+
+O back end está nesse repositório https://github.com/henrique-da-silva-costa/portifolio-back.
+
+Após isso, no terminal rode npm start, caso apareça um erro relacionado a essa pasta src\sdk\pagseguro.js, rode npm audit fix no terminal.
+
+Esse erro acontece porque a API do PagSeguro não tem um suporte muito bom para o ReactJS, sendo assim da esse erro.
+
 ## DESCRIÇÃO
 
 Esse projeto é um sistema voltado para barbearias.
