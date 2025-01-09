@@ -67,7 +67,7 @@ Tela de login do usuário master que é o Barbeiro
 
 ![Captura de Tela (43)](https://github.com/user-attachments/assets/fc0bad1a-e821-4d12-93fc-40133cd9021d)
 
-Nessa tela lista todas a barbearias do usuário barbeiro que está logado
+Nessa tela lista, exclui e edita, todas a barbearias do usuário barbeiro que está logado
 
 ### Cadastrar
 ![Captura de Tela (49)](https://github.com/user-attachments/assets/8bca2049-6d23-4c3f-9667-347ec1e9a516)
