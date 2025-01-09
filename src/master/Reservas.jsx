@@ -116,7 +116,7 @@ const Reservas = () => {
                                             <ModalExcluir
                                                 url={"reserva"}
                                                 id={reserva.id}
-                                                titulo={`Excluir reserva ${reserva.nome}`}
+                                                titulo={"EXCLUIR RESERVA"}
                                                 pegarDados={pegarDados}
                                             />
                                         </td>
