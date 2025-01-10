@@ -5,8 +5,8 @@ import Carregando from '../Carregando';
 import styles from "../Stylos.module.css";
 import BotaoVoltar from '../BotaoVoltar';
 import moment from 'moment';
-import ModalEditar from '../ModalEditar';
-import ModalExcluir from '../ModalExcluir';
+import ModalEditar from '../modais/ModalEditar';
+import ModalExcluir from '../modais/ModalExcluir';
 
 const Reservas = () => {
     const [horarios, setHorarios] = useState([]);

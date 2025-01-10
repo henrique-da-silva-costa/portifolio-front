@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { Dropdown, DropdownToggle, DropdownMenu, Button } from 'reactstrap';
-import { Usuario } from './contexts/Usuario';
-import styles from "./Stylos.module.css"
-import { UsuarioMaster } from './contexts/UsuarioMaster';
-import UsuarioLogo from "./user-icon-2098873_1920.png"
+import { Usuario } from '../contexts/Usuario';
+import styles from "../Stylos.module.css"
+import { UsuarioMaster } from '../contexts/UsuarioMaster';
+import UsuarioLogo from "../user-icon-2098873_1920.png"
 import { useNavigate } from 'react-router-dom';
 
 const ModalSairUsuario = () => {

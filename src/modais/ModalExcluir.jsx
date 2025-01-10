@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
-import styles from "./Stylos.module.css";
+import styles from "../Stylos.module.css";
 
 const ModalExcluir = ({ titulo = "EXCLUIR", id = null, url, pegarDados = () => { } }) => {
     const [modal, setModal] = useState(false);

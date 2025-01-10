@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import ModalExcluir from '../ModalExcluir';
 import { Button, Container, Table } from 'reactstrap';
-import ModalEditar from '../ModalEditar';
 import Carregando from '../Carregando';
-import ModalCadastrar from '../ModalCadastrar';
 import styles from "../Stylos.module.css";
+import ModalCadastrar from '../modais/ModalCadastrar';
+import ModalEditar from '../modais/ModalEditar';
+import ModalExcluir from '../modais/ModalExcluir';
 
 const Servico = ({ barbearia_id }) => {
     const [servicos, setServicos] = useState([]);

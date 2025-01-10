@@ -1,10 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Barbearia from '../master/Barbearia';
-import ModalSairUsuario from '../ModalSairUsuario';
 import Barbearias from '../master/Barbearias';
 import Reservas from '../master/Reservas';
 import Naoencontrado from "../Naoencontrado"
+import ModalSairUsuario from '../modais/ModalSairUsuario';
 
 const MasterRotas = () => {
     return (

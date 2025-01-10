@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import ModalCadastrar from '../ModalCadastrar';
+import ModalCadastrar from '../modais/ModalCadastrar';
 
 const Reserva = ({ barbearia_id }) => {
     const [horarios, setHorarios] = useState([]);

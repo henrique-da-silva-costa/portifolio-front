@@ -1,141 +1,47 @@
 import React, { useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
-import styles from "./Stylos.module.css";
+import { useNavigate } from 'react-router-dom';
+import { Button, Modal, ModalHeader, ModalBody, FormGroup, Input, Label } from 'reactstrap';
+import styles from "../Stylos.module.css";
 import axios from 'axios';
 import InputMask from "react-input-mask"
-import { editarColunas, tipoInputMaskara, tipoInputPlaceholder, tipos, tiposLabel, valorCepFixos, valoresFixos, valoresLimiteMaximo, valoresNumericos } from './funcoesFormularios';
+import { editarColunas, tipoInputMaskara, tipoInputPlaceholder, tipos, tiposLabel, valorCepFixos, valoresFixos, valoresLimiteMaximo, valoresNumericos } from '../funcoesFormularios';
 
-const ModalEditar = ({
-    pegarDados = () => { },
-    botaoAbrirNome = "EDITAR",
+const ModalCadastrar = ({
+    botaoAbrirNome = "",
     titulo = "",
     inputs = {},
+    pegarDados = () => { },
     botaoformulario = "CADASTRAR",
+    url = "",
     horarios = [],
     servicos = [],
-    id = null,
-    url = "",
-    urlEditar = "",
+    valorModal = false,
+    reserva = false,
     placeholderNomeTipo = "nome",
-    nomeFormulario = "",
     colunas = "",
-    colunasDeCep = false,
-    colunasDeReseva = false,
-    colunasDeHorario = false,
-    colunasDeServico = false,
+    nomeFormulario = "",
     modalTelaCheia = false
 }) => {
 
-    const [frmValor, setFrmValor] = useState([]);
-    const [msg, setMsg] = useState([]);
-    const [frmValorVarios, setFrmValorVarios] = useState([]);
-    const [modal, setModal] = useState(false);
+    const [modal, setModal] = useState(valorModal)
+    const [msg, setMsg] = useState("")
     const [erros, setErros] = useState({});
+    const [formularioValores, setFormularioValores] = useState(inputs);
     const [botaoDesabilitar, setBotaoDesabilitar] = useState(false);
     const [botaoMsg, setBotaoMsg] = useState(botaoformulario);
-    const [formularioValores, setFormularioValores] = useState(inputs);
+    const nav = useNavigate();
 
     const toggle = () => {
         setFormularioValores(inputs)
+        setErros({})
         setMsg("")
-        setModal(!modal)
-    }
-
-    const toggleInput = () => {
-        setBotaoMsg("CARREGANDO...");
-        setBotaoDesabilitar(true);
-        axios.get(`http://localhost:8000/${url}`, { params: { id: id } }).then((res) => {
-
-            console.log(res.data);
-
-            let ordenadoReseva = {
-                id: res.data.id,
-                hora: res.data.hora,
-                data: res.data.data,
-                servico: res.data.servico_id,
-                barbearia_id: res.data.barbearia_id,
-            }
-
-            let ordenadoCep = {
-                nome: res.data.nome,
-                telefone: res.data.telefone,
-                cep: res.data.cep,
-                estado: res.data.estado,
-                localidade: res.data.localidade,
-                bairro: res.data.bairro,
-                logradouro: res.data.logradouro,
-                numero: res.data.numero,
-                id: res.data.id,
-                usuarios_id: res.data.usuarios_id,
-            }
-
-            let ordenadoServico = {
-                id: res.data.id,
-                nome: res.data.nome,
-                valor: res.data.valor,
-                barbearia_id: res.data.barbearia_id,
-            }
-
-            let ordenadoHorario = {
-                id: res.data.id,
-                horario: res.data.horario,
-                barbearia_id: res.data.barbearia_id,
-
-            }
-
-            let dados = [];
-
-            if (colunasDeReseva) {
-                setFormularioValores(colunasDeReseva ? ordenadoReseva : res.data);
-                dados = Object.entries(colunasDeReseva ? ordenadoReseva : res.data).map(([key, value]) => {
-                    return { key, value };
-                });
-            }
-
-            if (colunasDeCep) {
-                setFormularioValores(colunasDeCep ? ordenadoCep : res.data);
-                dados = Object.entries(colunasDeCep ? ordenadoCep : res.data).map(([key, value]) => {
-                    return { key, value };
-                });
-            }
-
-            if (colunasDeHorario) {
-                setFormularioValores(colunasDeHorario ? ordenadoHorario : res.data);
-                dados = Object.entries(colunasDeHorario ? ordenadoHorario : res.data).map(([key, value]) => {
-                    return { key, value };
-                });
-            }
-
-            if (colunasDeServico) {
-                setFormularioValores(colunasDeServico ? ordenadoServico : res.data);
-                dados = Object.entries(colunasDeServico ? ordenadoServico : res.data).map(([key, value]) => {
-                    return { key, value };
-                });
-            }
-
-            if (dados[0] ? dados[0].value : []) {
-                const dadosVarios = Object.entries(dados[0] ? dados[0].value : []).map(([key, value]) => {
-                    return { key, value };
-                });
-
-                setFrmValorVarios(dadosVarios);
-            }
-
-            setBotaoMsg("EDITAR");
-            setBotaoDesabilitar(false);
-            setFrmValor(dados);
-            setModal(!modal)
-
-        }).catch((err) => {
-            setBotaoMsg("EDITAR");
-            setBotaoDesabilitar(false);
-            alert("Erro interno no servidor, contate o suporte");
-        })
-        // }, 200);
-    }
+        setModal(!modal);
+    };
 
     const pegarValorInput = (e) => {
         const { name, value, files } = e.target;
+
+        const errocep = {};
 
         if (name == "cep" && value.length >= 8) {
             setBotaoDesabilitar(true)
@@ -143,6 +49,18 @@ const ModalEditar = ({
             setBotaoDesabilitar(true);
             setTimeout(() => {
                 axios.get(`https://viacep.com.br/ws/${value}/json/`).then((res) => {
+                    Object.entries(formularioValores).map(([key, value]) => {
+                        if (res.data.erro) {
+                            if (key == "cep") {
+                                errocep[key] = "CEP INVÁLIDO";
+                                setErros(errocep);
+                            }
+                        } else {
+                            setErros("");
+                        }
+
+                    });
+
                     const dados = Object.entries(res.data).map(([key, value]) => {
                         valorDefault(key);
                         if (valorCepFixos.includes(key)) {
@@ -176,28 +94,7 @@ const ModalEditar = ({
         });
     };
 
-    const valorDefault = (valor) => {
-        let resposta = "";
-
-        if (frmValorVarios.length > 0) {
-            frmValorVarios.forEach(element => {
-                if (element.key === valor) {
-                    resposta = element.value;
-                }
-            });
-        }
-
-        frmValor.forEach(element => {
-            if (element.key === valor) {
-                resposta = element.value;
-            }
-        });
-
-        return resposta;
-    }
-
-    const valorDefaultCep = (tipo) => {
-
+    const valorDefault = (tipo = null) => {
         let resposta = "";
 
         Object.entries(formularioValores).map(([key, valor]) => {
@@ -211,7 +108,9 @@ const ModalEditar = ({
 
     const tipoInput = (tipo) => {
         if (tipo == "horario") {
-            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
+            return <select defaultValue={formularioValores.horario
+
+            } name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
                 <option value="" >SELECIONE</option>
                 <option value="08:00:00">08:00</option>
                 <option value="09:00:00">09:00</option>
@@ -228,7 +127,7 @@ const ModalEditar = ({
         }
 
         if (tipo == "hora") {
-            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" value={formularioValores.tipo}>
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
                 <option value={""}>SELECIONE...</option>
                 {
                     horarios.length > 0 ? horarios.map((h, i) => {
@@ -241,21 +140,21 @@ const ModalEditar = ({
         }
 
         if (tipo == "servico") {
-            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
                 <option value={""}>SELECIONE...</option>
-                {
-                    servicos.length > 0 ? servicos.map((s, i) => {
-                        return (
-                            <option key={i} value={s.id}>{s.nome}</option>
-                        )
-                    }) : ""
-                }
+                {servicos.length > 0 ? servicos.map((s, i) => {
+                    return (
+                        <option key={i} value={s.id}>{s.nome}</option>
+                    )
+                }) : ""}
             </select>
         }
 
         if (tipo == "img") {
             return <Input
+                placeholder={tipoInputPlaceholder(tipo)}
                 disabled={botaoDesabilitar}
+                defaultValue={valorDefault(tipo)}
                 name={tipo}
                 accept="image/*"
                 value={formularioValores.tipo}
@@ -265,26 +164,26 @@ const ModalEditar = ({
         }
 
         return <InputMask
-            className="form-control"
             placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
+            className="form-control"
             mask={tipoInputMaskara(tipo)}
             disabled={botaoDesabilitar}
             name={tipo}
-            defaultValue={valorDefault(tipo)}
-            value={formularioValores.cep ? valorDefaultCep(tipo) : formularioValores.tipo}
+            value={valorDefault(tipo)}
             type={tipos(tipo)}
             onChange={pegarValorInput}
         />
     }
 
-    const editar = (e) => {
+    const cadastrar = (e) => {
         e.preventDefault();
+
         setBotaoMsg("CARREGANDO...");
         setBotaoDesabilitar(true);
 
         const newErrors = {};
 
-        axios.put(`http://127.0.0.1:8000/${urlEditar}`, formularioValores).then((res) => {
+        axios.post(`http://127.0.0.1:8000/${url}`, formularioValores).then((res) => {
             for (const [key, value] of Object.entries(formularioValores)) {
                 if (value && !valoresFixos.includes(key)) {
                     newErrors[key] = "";
@@ -297,7 +196,7 @@ const ModalEditar = ({
                 }
 
                 else if (key === "email" && !/\S+@\S+\.\S+/.test(value)) {
-                    newErrors[key] = "O e-mail deve ser válido.";
+                    newErrors[key] = "O E-mail deve ser válido.";
                 }
 
                 else if (key === "encript") {
@@ -306,7 +205,6 @@ const ModalEditar = ({
 
                 if (value && !valoresFixos.includes(key)) {
                     newErrors[key] = "";
-                    setModal(true);
                 }
 
                 if (res.data.error) {
@@ -320,11 +218,27 @@ const ModalEditar = ({
                 setErros(newErrors);
             }
 
+            if (reserva) {
+                for (const [key, value] of Object.entries(formularioValores)) {
+                    if (!value) {
+                        setBotaoMsg(botaoformulario);
+                        setBotaoDesabilitar(false);
+                        return;
+                    }
+                }
+
+                setBotaoMsg(botaoformulario);
+                setBotaoDesabilitar(false);
+                localStorage.setItem("reserva", JSON.stringify(formularioValores));
+                nav("/pagamento")
+            }
+
             setMsg("");
             pegarDados();
             setBotaoMsg(botaoformulario);
             setBotaoDesabilitar(false);
             setModal(false);
+
         }).catch((err) => {
             for (const [key, value] of Object.entries(formularioValores)) {
                 if (!err.response) {
@@ -335,10 +249,6 @@ const ModalEditar = ({
                     return;
                 }
 
-                if (valoresNumericos.includes(key) && value != Number) {
-                    newErrors[key] = "Esse campo deve ser numérico"
-                }
-
                 if (err.response.data) {
                     if (valoresLimiteMaximo.includes(key) && value.length > 255) {
                         newErrors[key] = "Esse campo não pode ter mais que 255 caracteres";
@@ -346,6 +256,10 @@ const ModalEditar = ({
 
                     if (key == "numero" && value.length > 10) {
                         newErrors[key] = "Esse campo não pode ter mais que 10 caracteres";
+                    }
+
+                    if (valoresNumericos.includes(key) && value != Number) {
+                        newErrors[key] = "Esse campo deve ser numérico"
                     }
                 }
 
@@ -363,31 +277,28 @@ const ModalEditar = ({
 
 
                 if (value && !valoresFixos.includes(key)) {
-                    setModal(true);
+                    setModal(valorModal);
                 }
+
+                setMsg("");
+                pegarDados();
+                setBotaoMsg(botaoformulario);
+                setBotaoDesabilitar(false);
+                setModal(false);
 
                 setErros(newErrors);
             }
-
-            if (!err.response) {
-                setMsg("Erro interno no servidor, contate o suporte")
-                setErros("");
-            }
-
-            setBotaoMsg(botaoformulario);
-            setBotaoDesabilitar(false);
             setModal(true);
-        });
+        })
     }
 
     return (
-
         <div>
-            <Button color="success" disabled={botaoDesabilitar} onClick={toggleInput}>{botaoMsg}</Button>
+            <Button color="success" onClick={toggle}>{botaoAbrirNome}</Button>
             <Modal isOpen={modal} fullscreen={modalTelaCheia}>
                 <ModalHeader toggle={toggle}>{titulo}</ModalHeader>
                 <ModalBody>
-                    <Form onSubmit={editar}>
+                    <form onSubmit={cadastrar}>
                         <FormGroup>
                             <div className="row">
                                 {formularioValores ? Object.keys(formularioValores).map((valores, i) => (
@@ -411,11 +322,11 @@ const ModalEditar = ({
                             </Button>
                             <Button color="success" disabled={botaoDesabilitar}>{botaoMsg}</Button>
                         </div>
-                    </Form>
+                    </form>
                 </ModalBody>
             </Modal>
         </div >
     )
 }
 
-export default ModalEditar
+export default ModalCadastrar

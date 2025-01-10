@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'reactstrap';
-import ModalCadastrar from '../ModalCadastrar';
+import ModalCadastrar from '../modais/ModalCadastrar';
 
 const CadastrarBarbearia = ({ pegarDados = () => { } }) => {
     const inputs = {

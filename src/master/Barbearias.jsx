@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Table } from 'reactstrap';
 import CadastrarBarbearia from './CadastrarBarbearia';
-import ModalExcluir from '../ModalExcluir';
-import ModalEditar from '../ModalEditar';
+import ModalExcluir from '../modais/ModalExcluir';
+import ModalEditar from '../modais/ModalEditar';
 import Carregando from '../Carregando';
 import styles from "../Stylos.module.css";
 

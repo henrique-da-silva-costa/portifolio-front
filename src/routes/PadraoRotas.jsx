@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Naoencontrado from '../Naoencontrado';
 import Home from '../reservas/Home';
 import Barbearia from '../reservas/Barbearia';
-import ModalSairUsuario from '../ModalSairUsuario';
+import ModalSairUsuario from '../modais/ModalSairUsuario';
 import Pagamento from '../pagamentos/Pagamento';
 
 const PadraoRotas = () => {
