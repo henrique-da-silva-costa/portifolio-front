@@ -32,7 +32,7 @@ const Barbearias = () => {
 
     const pegarDados = (page) => {
         setBotaoDesabilitado(true)
-        axios.get("http://127.0.0.1:8000/barbeariasunicas", {
+        axios.get("http://127.0.0.1:8000/barbearias/usuario", {
             params: {
                 "id": sessionStorage.getItem("usuarioId"),
                 "page": page
