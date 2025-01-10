@@ -52,10 +52,35 @@ const Formularios = ({
     const limparFiltros = () => {
         formRef.current.reset();
         setFormularioValores({
+            filtroNome: "",
             filtroCep: "",
             filtroEstado: "",
             filtroCidade: ""
         })
+
+        setBotaoMsg("CARREGANDO...");
+        setBotaoDesabilitar(true);
+
+        axios.get("http://localhost:8000/barbearias/filtros", {
+            params: {
+                filtroNome: "",
+                filtroCep: "",
+                filtroEstado: "",
+                filtroCidade: ""
+            }
+        }).then((res) => {
+            dados(res.data.data)
+            setBotaoDesabilitar(false);
+            paginaAtual(res.data.current_page);
+            totalPages(res.data.last_page);
+            setBotaoMsg(botaoformulario);
+        }).catch((err) => {
+            setBotaoDesabilitar(false);
+            setBotaoMsg(botaoformulario);
+        })
+
+        return
+
     };
 
     const mudarTipoSenha = (tipo) => {

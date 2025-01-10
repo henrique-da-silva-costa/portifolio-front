@@ -16,6 +16,7 @@ const Home = () => {
     const nav = useNavigate();
 
     const inputs = {
+        filtroNome: "",
         filtroCep: "",
         filtroEstado: "",
         filtroCidade: ""
@@ -58,7 +59,7 @@ const Home = () => {
             <h1 className="p-2">Barbearias</h1>
             <Container className="p-sm-5">
                 <Formularios
-                    colunas={"col-md-4"}
+                    colunas={"col-md-3"}
                     nomeFormulario={"filtros"}
                     filtros={true}
                     botaoformulario={"FILTRAR"}
@@ -74,7 +75,7 @@ const Home = () => {
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Telefone</th>
+                                <th>Cep</th>
                                 <th>Cidade/Estado</th>
                                 <th></th>
                             </tr>
@@ -88,7 +89,7 @@ const Home = () => {
                                                 <p><strong>{dado.nome}</strong></p>
                                             </td>
                                             <td>
-                                                <p>{dado.telefone}</p>
+                                                <p>{dado.cep}</p>
                                             </td>
                                             <td><p>{dado.localidade && dado.estado ? dado.localidade + "/" + dado.estado : "Não informado"} </p>
                                             </td>

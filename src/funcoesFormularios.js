@@ -131,6 +131,10 @@ export function tiposLabel(label) {
         return "CEP"
     }
 
+    if (label == "filtroNome") {
+        return "Nome"
+    }
+
     if (label == "email") {
         return "E-mail"
     }
@@ -188,6 +192,7 @@ export function tipoInputPlaceholder(tipo, tipoplaceholder = "") {
         localidade: "Informe a cidade",
         filtroCidade: "Informe a cidade",
         filtroEstado: "Informe o estado",
+        filtroNome: "Informe o nome",
         filtroCep: "99999-999",
         estado: "Informe o estado",
         logradouro: "Informe o nome da rua",
