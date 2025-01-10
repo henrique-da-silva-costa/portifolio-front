@@ -95,73 +95,6 @@ const Formularios = ({
         });
     };
 
-    const tipoInput = (tipo) => {
-        const tiposSenha = ["senha", "novasenha", "confirmasenha"];
-
-        if (tipo == "hora") {
-            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
-                <option value={""}>SELECIONE...</option>
-                {
-                    horarios ? horarios.map((h, i) => {
-                        return (
-                            <option key={i} value={h.horario}>{h.horario}</option>
-                        )
-                    }) : ""
-                }
-            </select >
-        }
-
-        if (tipo == "servico") {
-            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
-                <option value={""}>Selecione...</option>
-                {servicos ? servicos.map((s, i) => {
-                    return (
-                        <option key={i} value={s.id}>{s.nome}</option>
-                    )
-                }) : ""}
-            </select>
-        }
-
-        if (tipo == "img") {
-            return <Input
-                name={tipo}
-                accept="image/*"
-                value={formularioValores.tipo}
-                type={tipos(tipo)}
-                onChange={pegarValorInput}
-                disabled={botaoDesabilitar}
-            />
-        }
-
-        if (tiposSenha.includes(tipo)) {
-            return <div className="d-flex gap-2">
-                <Input
-                    id={tipo}
-                    placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
-                    name={tipo}
-                    value={formularioValores.tipo}
-                    type={tipoSenha}
-                    onChange={pegarValorInput}
-                    disabled={botaoDesabilitar}
-                />
-                <Button color="transparent" className="border border-0" onClick={() => mudarTipoSenha(tipo)}><FaEye /></Button>
-            </div>
-
-        }
-
-        return <InputMask
-            placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
-            mask={tipoInputMaskara(tipo)}
-            id={tipo}
-            className="form-control"
-            name={tipo}
-            value={formularioValores.tipo}
-            type={tipos(tipo)}
-            onChange={pegarValorInput}
-            disabled={botaoDesabilitar}
-        />
-    }
-
     const enviar = (e) => {
         e.preventDefault();
         const newErrors = {};
@@ -344,6 +277,73 @@ const Formularios = ({
         })
 
         setErros(newErrors);
+    }
+
+    const tipoInput = (tipo) => {
+        const tiposSenha = ["senha", "novasenha", "confirmasenha"];
+
+        if (tipo == "hora") {
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" >
+                <option value={""}>SELECIONE...</option>
+                {
+                    horarios ? horarios.map((h, i) => {
+                        return (
+                            <option key={i} value={h.horario}>{h.horario}</option>
+                        )
+                    }) : ""
+                }
+            </select >
+        }
+
+        if (tipo == "servico") {
+            return <select name={tipo} disabled={botaoDesabilitar} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+                <option value={""}>Selecione...</option>
+                {servicos ? servicos.map((s, i) => {
+                    return (
+                        <option key={i} value={s.id}>{s.nome}</option>
+                    )
+                }) : ""}
+            </select>
+        }
+
+        if (tipo == "img") {
+            return <Input
+                name={tipo}
+                accept="image/*"
+                value={formularioValores.tipo}
+                type={tipos(tipo)}
+                onChange={pegarValorInput}
+                disabled={botaoDesabilitar}
+            />
+        }
+
+        if (tiposSenha.includes(tipo)) {
+            return <div className="d-flex gap-2">
+                <Input
+                    id={tipo}
+                    placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
+                    name={tipo}
+                    value={formularioValores.tipo}
+                    type={tipoSenha}
+                    onChange={pegarValorInput}
+                    disabled={botaoDesabilitar}
+                />
+                <Button color="transparent" className="border border-0" onClick={() => mudarTipoSenha(tipo)}><FaEye /></Button>
+            </div>
+
+        }
+
+        return <InputMask
+            placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
+            mask={tipoInputMaskara(tipo)}
+            id={tipo}
+            className="form-control"
+            name={tipo}
+            value={formularioValores.tipo}
+            type={tipos(tipo)}
+            onChange={pegarValorInput}
+            disabled={botaoDesabilitar}
+        />
     }
 
     return (

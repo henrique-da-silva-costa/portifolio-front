@@ -209,74 +209,6 @@ const ModalEditar = ({
         return resposta;
     }
 
-    const tipoInput = (tipo) => {
-        if (tipo == "horario") {
-            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
-                <option value="" >SELECIONE</option>
-                <option value="08:00:00">08:00</option>
-                <option value="09:00:00">09:00</option>
-                <option value="10:00:00">10:00</option>
-                <option value="11:00:00">11:00</option>
-                <option value="12:00:00">12:00</option>
-                <option value="13:30:00">13:30</option>
-                <option value="14:00:00">14:00</option>
-                <option value="15:00:00">15:00</option>
-                <option value="16:00:00">16:00</option>
-                <option value="17:00:00">17:00</option>
-                <option value="18:00:00">18:00</option>
-            </select >
-        }
-
-        if (tipo == "hora") {
-            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" value={formularioValores.tipo}>
-                <option value={""}>SELECIONE...</option>
-                {
-                    horarios.length > 0 ? horarios.map((h, i) => {
-                        return (
-                            <option key={i} value={h.horario}>{h.horario}</option>
-                        )
-                    }) : ""
-                }
-            </select >
-        }
-
-        if (tipo == "servico") {
-            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
-                <option value={""}>SELECIONE...</option>
-                {
-                    servicos.length > 0 ? servicos.map((s, i) => {
-                        return (
-                            <option key={i} value={s.id}>{s.nome}</option>
-                        )
-                    }) : ""
-                }
-            </select>
-        }
-
-        if (tipo == "img") {
-            return <Input
-                disabled={botaoDesabilitar}
-                name={tipo}
-                accept="image/*"
-                value={formularioValores.tipo}
-                type={tipos(tipo)}
-                onChange={pegarValorInput}
-            />
-        }
-
-        return <InputMask
-            className="form-control"
-            placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
-            mask={tipoInputMaskara(tipo)}
-            disabled={botaoDesabilitar}
-            name={tipo}
-            defaultValue={valorDefault(tipo)}
-            value={formularioValores.cep ? valorDefaultCep(tipo) : formularioValores.tipo}
-            type={tipos(tipo)}
-            onChange={pegarValorInput}
-        />
-    }
-
     const editar = (e) => {
         e.preventDefault();
         setBotaoMsg("CARREGANDO...");
@@ -378,6 +310,74 @@ const ModalEditar = ({
             setBotaoDesabilitar(false);
             setModal(true);
         });
+    }
+
+    const tipoInput = (tipo) => {
+        if (tipo == "horario") {
+            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.horario = e.target.value} className="form-control" >
+                <option value="" >SELECIONE</option>
+                <option value="08:00:00">08:00</option>
+                <option value="09:00:00">09:00</option>
+                <option value="10:00:00">10:00</option>
+                <option value="11:00:00">11:00</option>
+                <option value="12:00:00">12:00</option>
+                <option value="13:30:00">13:30</option>
+                <option value="14:00:00">14:00</option>
+                <option value="15:00:00">15:00</option>
+                <option value="16:00:00">16:00</option>
+                <option value="17:00:00">17:00</option>
+                <option value="18:00:00">18:00</option>
+            </select >
+        }
+
+        if (tipo == "hora") {
+            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.hora = e.target.value} className="form-control" value={formularioValores.tipo}>
+                <option value={""}>SELECIONE...</option>
+                {
+                    horarios.length > 0 ? horarios.map((h, i) => {
+                        return (
+                            <option key={i} value={h.horario}>{h.horario}</option>
+                        )
+                    }) : ""
+                }
+            </select >
+        }
+
+        if (tipo == "servico") {
+            return <select disabled={botaoDesabilitar} defaultValue={valorDefault(tipo)} name={tipo} onChange={(e) => formularioValores.servico = e.target.value} className="form-control" value={formularioValores.tipo} >
+                <option value={""}>SELECIONE...</option>
+                {
+                    servicos.length > 0 ? servicos.map((s, i) => {
+                        return (
+                            <option key={i} value={s.id}>{s.nome}</option>
+                        )
+                    }) : ""
+                }
+            </select>
+        }
+
+        if (tipo == "img") {
+            return <Input
+                disabled={botaoDesabilitar}
+                name={tipo}
+                accept="image/*"
+                value={formularioValores.tipo}
+                type={tipos(tipo)}
+                onChange={pegarValorInput}
+            />
+        }
+
+        return <InputMask
+            className="form-control"
+            placeholder={tipoInputPlaceholder(tipo, placeholderNomeTipo)}
+            mask={tipoInputMaskara(tipo)}
+            disabled={botaoDesabilitar}
+            name={tipo}
+            defaultValue={valorDefault(tipo)}
+            value={formularioValores.cep ? valorDefaultCep(tipo) : formularioValores.tipo}
+            type={tipos(tipo)}
+            onChange={pegarValorInput}
+        />
     }
 
     return (
