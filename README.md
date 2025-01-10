@@ -1,70 +1,119 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Projeto barbearias FRONT END
 
-## Available Scripts
+## Para inicar o projeto
 
-In the project directory, you can run:
+Para rodar é necessário ter o NODE-JS instalado em sua máquina e ter o back-end baixado e rodando.
 
-### `npm start`
+O back end está nesse repositório https://github.com/henrique-da-silva-costa/portifolio-back.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Após isso, no terminal rode npm start, caso apareça um erro relacionado a essa pasta src\sdk\pagseguro.js, rode npm audit fix no terminal.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Esse erro acontece porque a API do PagSeguro não tem um suporte muito bom para o ReactJS, sendo assim da esse erro.
 
-### `npm test`
+## DESCRIÇÃO
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Esse projeto é um sistema voltado para barbearias.
 
-### `npm run build`
+Nesse sistema você pode criar um usuário master (barbeiro) e assim você consegue cadastrar barbearias e administrá-las como, por exemplo, modificar, excluir e adicionar serviços e horários a suas barbearias cadastradas pelo seu usuário.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+E você também pode criar um usuário comum(cliente) que pode fazer a reserva nas barbearias disponíveis, que são as que tem horários e serviços cadastrados.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Nesse sistema na parte de fazer a reserva tem uma integração de pagamento usando a API do PagSeguro, mas não está homologada, sendo assim faz o pagamento, mas não é pago realmente só é aprovado dentro do ambiente do PagSeguro que eu tenho acesso.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## TELAS
 
-### `npm run eject`
+### Login
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Captura de Tela (41)](https://github.com/user-attachments/assets/23463bb7-b51b-481b-8d4a-c152fbc03972)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Tela de login de usuário normal 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Home - Pagina principal
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![Captura de Tela (63)](https://github.com/user-attachments/assets/2ee10c86-0479-4eb6-b932-fe5f7a9cca00)
 
-## Learn More
+Essa tela lista todas as barbearias disponíveis e tem um filtro por CEP, Estado e cidade
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+E também aqui você pode ir para a página de agendamento clicando no botão AGENDAR HORÁRIO.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Reserva - horário/serviço
 
-### Code Splitting
+![Captura de Tela (64)](https://github.com/user-attachments/assets/ef9dbda7-e0d7-48f2-8734-f42d00f3c76d)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Captura de Tela (65)](https://github.com/user-attachments/assets/56e635f8-e44f-411a-8438-4392adf21d96)
 
-### Analyzing the Bundle Size
+Nessas telas você pode ver os horários e serviços disponíveis para reserva
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Reserva
 
-### Making a Progressive Web App
+![Captura de Tela (67)](https://github.com/user-attachments/assets/ed66ab13-691e-4ef3-93be-4fd5e95e9613)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Nessa mesma tela, ao clicar no botão AGENDAR HORÁRIO, você pode fazer o agendamento do seu horário.
 
-### Advanced Configuration
+### Pagamento - cartão/pix
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Captura de Tela (68)](https://github.com/user-attachments/assets/bfaecc55-dc81-4386-ab94-249dcb36d28c)
 
-### Deployment
+Nessa tela é onde você pode realizar o pagamento
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Login barbeiro
 
-### `npm run build` fails to minify
+![Captura de Tela (42)](https://github.com/user-attachments/assets/ec8625dc-2c7c-4ed0-b5f0-76aa52d28eb9)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Tela de login do usuário master que é o Barbeiro
+
+### Barbearias
+
+![Captura de Tela (43)](https://github.com/user-attachments/assets/fc0bad1a-e821-4d12-93fc-40133cd9021d)
+
+Nessa tela lista, exclui e edita, todas a barbearias do usuário barbeiro que está logado
+
+### Cadastrar
+![Captura de Tela (49)](https://github.com/user-attachments/assets/8bca2049-6d23-4c3f-9667-347ec1e9a516)
+
+Na mesma tela de Barbearias, ao clicar no botão cadastrar barbearia, você pode cadastrar uma barbearia.
+
+### Editar
+![Captura de Tela (50)](https://github.com/user-attachments/assets/cf8cd22d-abe2-4fc0-acaf-89364fff71b1)
+
+Na mesma tela de barbearias ao clicar no botão editar, você pode editar uma barbearia
+
+### Excluir
+![Captura de Tela (72)](https://github.com/user-attachments/assets/1c6e9814-219c-47f1-b475-6557e1ca6bdc)
+
+Na mesma tela de barbearias ao clicar no botão excluir você pode excluir uma barbearia
+
+### Reservas
+
+![Captura de Tela (46)](https://github.com/user-attachments/assets/aadf62eb-d552-4e96-a2ee-ac0f8884f266)
+
+Ao clicar no botão reserva, você vai para a tela de reservas e essa tela lista todas as reservas da barbearia que você clicou e você pode editar e excluir as reservas feitas.
+
+### Ver mais - horário/serviço
+![Captura de Tela (51)](https://github.com/user-attachments/assets/016dc08a-270e-4227-9b7e-9e81a01a8c19)
+
+![Captura de Tela (52)](https://github.com/user-attachments/assets/c7ae9907-baaa-421e-a4db-4dabc2461f40)
+
+Essa tela lista todos os horários e serviços da barbearia que você clicou.
+
+### Ver mais - horário/serviço - cadastrar
+![Captura de Tela (55)](https://github.com/user-attachments/assets/7815f072-0591-4679-b7e5-dc0be7a09fa6)
+![Captura de Tela (53)](https://github.com/user-attachments/assets/85e5d5da-5ed7-4f93-8545-fe3299315444)
+
+Nessa mesma tela, ao clicar no botão cadastrar você pode cadastrar um serviço ou horário
+
+### Ver mais - horário/serviço - editar
+![Captura de Tela (57)](https://github.com/user-attachments/assets/5775772c-52ed-42fd-be28-fdb0b5e9de7e)
+![Captura de Tela (58)](https://github.com/user-attachments/assets/7ea1d93d-205a-4b72-8f34-6f1fbd5084ec)
+
+Nessa mesma tela, ao clicar no botão editar você pode editar um serviço ou horário
+
+### Ver mais - horário/serviço - excluir
+![Captura de Tela (62)](https://github.com/user-attachments/assets/e257eb6e-d445-4bc8-8574-33a72d27f088)
+![Captura de Tela (61)](https://github.com/user-attachments/assets/4ba957d6-934b-437e-a007-d9ccc23c70c3)
+
+Nessa mesma tela, ao clicar no botão excluir você pode excluir um serviço ou horário
+
+
+
