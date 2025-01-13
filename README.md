@@ -1,6 +1,11 @@
 
 # Projeto barbearias FRONT END
 
+## Tecnologias usadas
+
+Front-end (React/Bootstrap)
+Back-end(PHP/Laravel)
+
 ## Para inicar o projeto
 
 Para rodar é necessário ter o NODE-JS instalado em sua máquina e ter o back-end baixado e rodando.
